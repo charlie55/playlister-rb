@@ -38,22 +38,6 @@ end
 # any script that utilizes them (including this test script). Once required
 # all the tests within this suite should pass.
 
-Class Song
-  attr:accessor :song
-  
-end
-
-Class Artist
-  attr:accessor :artist
-  
-end
-
-Class Genre
-  attr:accessor :genre
-  
-end
-
-
 
 
 # Artist Specs
