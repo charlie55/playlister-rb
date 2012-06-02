@@ -1,7 +1,16 @@
+require 'lib/artist'
+require 'lib/genre'
+require 'lib/song'
+
 def test(title, &b)
   begin
     if b
-      b.call
+      result = b.call
+      if result
+        puts "pass: #{title}"
+      else
+        puts "fail: #{title}"
+      end
     else
       puts "pending: #{title}"
     end
@@ -12,23 +21,19 @@ def test(title, &b)
 end
 
 def assert(statement)
-  if statement
-    puts "pass"
-  else
-    puts "fail"
-  end
+  !!statement
 end
 
 def assert_equal(actual, expected)
   if expected == actual
-    puts 'pass'
+    true
   else
-    puts "fail: expected #{expected}, got #{actual}"
+    false
   end
 end
 # don't edit anything above line 28
 
-
+song = Song.new
 
 
 # Part 1: Object Models
@@ -39,38 +44,46 @@ end
 # all the tests within this suite should pass.
 
 
-
 # Artist Specs
 test 'Can initialize an Artist' do
   assert Artist.new
 end
+#pass
+
 
 test 'An artist can have a name' do
   artist = Artist.new
   artist.name = "Adele"
   assert_equal artist.name, "Adele"
 end
+#pass
 
 test "An artist has songs" do
   artist = Artist.new
   artist.songs = []
   assert_equal artist.songs, []
 end
+#pass
+
 
 test 'The Artist class can reset the artists that have been created' do
   assert Artist.reset_artists
   assert_equal Artist.count, 0
 end
+#pass
+
 
 test 'The Artist class can keep track of artists as they are created' do
   Artist.reset_artists
   artist = Artist.new
   assert Artist.all.include?(artist)
 end
+#pass
 
 test 'The Artist class can count how many artists have been created' do
   assert Artist.count
 end
+#pass
 
 test 'artists have songs' do
   artist = Artist.new
@@ -79,6 +92,7 @@ test 'artists have songs' do
 
   assert_equal artist.songs, songs
 end
+#pass
 
 test 'An artist can count how many songs they have' do
   artist = Artist.new
@@ -87,6 +101,8 @@ test 'An artist can count how many songs they have' do
 
   assert_equal artist.songs_count, 2
 end
+#pass
+
 
 test 'a song can be added to an artist' do
   artist = Artist.new
